@@ -19,7 +19,7 @@ module.exports = (Franz) => {
       e.stopImmediatePropagation();
       e.preventDefault();
 
-      shell.openExternal(elem.getAttribute('href'));
+      window.open(elem.getAttribute('href'));
     }
   }, true);
 };
