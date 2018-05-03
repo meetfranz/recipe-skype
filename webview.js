@@ -3,7 +3,7 @@ import { shell } from 'electron';
 
 module.exports = (Franz) => {
   const getMessages = function getMessages() {
-    const count = document.querySelectorAll('.counter').length;
+  const count = document.querySelectorAll('swx-unread-message-counter>.counter').length;
 
     // set Franz badge
     Franz.setBadge(count);
