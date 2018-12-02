@@ -7,7 +7,7 @@
   "author": "Stefan Malzner <stefan@adlk.io>",
   "license": "MIT",
   "config": {
-    "serviceURL": "https://web.skype.com",
+    "serviceURL": "https://preview.web.skype.com/",
     "hasNotificationSound": true
   }
 }
