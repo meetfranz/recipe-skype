@@ -1,25 +1,22 @@
-import path from 'path';
-import { shell } from 'electron';
-
 module.exports = (Franz) => {
   const getMessages = function getMessages() {
-    const count = document.querySelectorAll('.counter').length;
+    let count = 0;
+    const container = document.querySelector('[role="tablist"] > [title="Chats"] > div');
+    if (container) {
+      const children = container.children;
+
+      if (children.length === 3) {
+        const elementContainer = children[children.length - 1];
+        if (elementContainer) {
+          const element = elementContainer.querySelector('[data-text-as-pseudo-element]');
+          count = parseInt(element.dataset.textAsPseudoElement, 10);
+        }
+      }
+    }
 
     // set Franz badge
     Franz.setBadge(count);
   };
 
   Franz.loop(getMessages);
-
-  Franz.injectCSS(path.join(__dirname, 'service.css'));
-
-  document.addEventListener('click', (e) => {
-    const elem = e.target.closest('a[rel*="noopener"], a.thumbnailHolder');
-    if (elem) {
-      e.stopImmediatePropagation();
-      e.preventDefault();
-
-      window.open(elem.getAttribute('href'));
-    }
-  }, true);
 };
