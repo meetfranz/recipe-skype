@@ -1,13 +1,14 @@
 {
   "id": "skype",
   "name": "Skype",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "description": "Skype",
   "main": "index.js",
   "author": "Stefan Malzner <stefan@adlk.io>",
   "license": "MIT",
   "config": {
     "serviceURL": "https://web.skype.com/",
-    "hasNotificationSound": true
+    "hasNotificationSound": true,
+    "disablewebsecurity": true
   }
 }

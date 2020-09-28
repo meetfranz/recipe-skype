@@ -25,34 +25,37 @@ module.exports = (Franz, settings) => {
   Franz.loop(getMessages);
 
   // Link fix
-  document.addEventListener('click', (event) => {
-    const link = event.target.closest('a[href^="http"]');
-    const button = event.target.closest('button[title^="http"]');
+  // The `franzVersion` param is available since 5.4.0-beta.2
+  if (settings.franzVersion) {
+    document.addEventListener('click', (event) => {
+      const link = event.target.closest('a[href^="http"]');
+      const button = event.target.closest('button[title^="http"]');
 
-    if (link || button) {
-      const url = link ? link.getAttribute('href') : button.getAttribute('title');
-      event.preventDefault();
-      event.stopPropagation();
+      if (link || button) {
+        const url = link ? link.getAttribute('href') : button.getAttribute('title');
+        event.preventDefault();
+        event.stopPropagation();
 
-      // if image
-      if (url.includes('views/imgpsh_fullsize_anim')) {
-        let win = new BrowserWindow({
-          width: 800,
-          height: window.innerHeight,
-          minWidth: 600,
-          webPreferences: {
-            partition: `persist:service-${settings.id}`,
-          },
-        });
 
-        win.loadURL(url);
+        if (url.includes('views/imgpsh_fullsize_anim')) {
+          let win = new BrowserWindow({
+            width: 800,
+            height: window.innerHeight,
+            minWidth: 600,
+            webPreferences: {
+              partition: `persist:service-${settings.id}`,
+            },
+          });
 
-        win.on('closed', () => {
-          win = null;
-        });
-      } else {
-        window.open(url);
+          win.loadURL(url);
+
+          win.on('closed', () => {
+            win = null;
+          });
+        } else {
+          window.open(url);
+        }
       }
-    }
-  }, true);
+    }, true);
+  }
 };
